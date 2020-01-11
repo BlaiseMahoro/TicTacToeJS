@@ -55,16 +55,14 @@ else{
   
 }
  
-// console.log("Name = "+name);
-// console.log("model = "+mode );
-//dispBoard(board)
+
 while(!gameOver(board)){
   if (turn==='X'){
     //X play
 
     if(mode.toUpperCase()==='C'){
       computerPlay(board, 'X');
-      
+      console.log('ComputerAI played!')
     }
     else{
       var pos = await new Promise((resolve, reject) => {
@@ -114,8 +112,16 @@ while(!gameOver(board)){
 
 rl.close();
 console.log('Game over!')
-console.log(board[2], board[5],board[8])
-console.log(board[2]+board[5]+board[8]==='O'.repeat(3))
+if(isWinner(board, 'X')){
+  console.log(player1?player1:'Player1'," wins!")
+}
+else if(isWinner(board,'O')){
+  console.log(player2?player2:'Player2', " wins!")
+}
+else
+  console.log(`It's a draw!`)
+// console.log(board[2], board[5],board[8])
+// console.log(board[2]+board[5]+board[8]==='O'.repeat(3))
 
 //  while(!gameOver(board)){
 
