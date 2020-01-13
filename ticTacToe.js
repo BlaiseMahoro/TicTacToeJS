@@ -185,7 +185,7 @@ const game= async()=>{
     })
   })
   //looking for the first character
-  play_again=play_again.trim()[0].toLocaleUpperCase()
+  play_again=play_again.trim()[0].toUpperCase()
   //validates input
   while( play_again != 'N'&& play_again!='Y'){
     console.log('Invalid answer. \n')
@@ -194,7 +194,7 @@ const game= async()=>{
         resolve(input)
       })
     })
-    play_again=play_again.trim()[0].toLocaleUpperCase()
+    play_again=play_again.trim()[0].toUpperCase()
   }
   }
   rl.close();
