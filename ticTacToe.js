@@ -13,8 +13,6 @@ function initBoard(board){
 
 }
 
-
-
 function gameOver(board){
     //check if board is full or there is winner
     return isFull(board)||isWinner(board,'X')||isWinner(board,'O');
@@ -73,14 +71,14 @@ const game= async()=>{
    var turn = 'X';//by deault player1 is X and player2 is O
    
    var mode = await new Promise((resolve, reject) => {
-      rl.question('Choose mode Computer(C) and Human(H) : ', (input) => {
+      rl.question('Choose mode Computer(C) and Human(H): ', (input) => {
      resolve(input.trim())})
   });
   //validates user input
   while(mode.toUpperCase()!=='C' &&mode.toUpperCase()!=='H' ){
     console.log('Try again! Enter C or H.')
     var mode = await new Promise((resolve, reject) => {
-      rl.question('Choose mode Computer(C) and Human(H) : ', (input) => {
+      rl.question('Choose mode Computer(C) and Human(H): ', (input) => {
      resolve(input.trim())})
     });
   }
@@ -90,11 +88,13 @@ const game= async()=>{
     rl.question(`Enter Player X's name (optional): `, (input) => {
     resolve(input.trim())})
     });
+   
     //prompts for player2's name
     player2 = await new Promise((resolve, reject) => {
       rl.question(`Enter Player O's name (optional): `, (input) => {
       resolve(input.trim())})
       });
+    
     
   
   }
@@ -109,7 +109,8 @@ const game= async()=>{
     
     
   }
-   
+  player1= player1?player1:'Player1'
+  player2 = player2?player2:'Player2'
   while(!gameOver(board)){
     //this loops allows checking if there is a winner or board is full.
     if (turn==='X'){
@@ -121,14 +122,14 @@ const game= async()=>{
       }
       else{
         var pos = await new Promise((resolve, reject) => {
-          rl.question(player1?player1+', enter a position (0-8) : ':'Player1, enter a position(0-8): ', (input) => {
+          rl.question(player1+', enter a position (0-8) : ', (input) => {
          resolve(input)})
         
       });
       while(board[pos]!==' '||parseInt(pos) <0 ||parseInt(pos) >8){
         console.log('Spot is already taken or invalid position entered!')
         var pos = await new Promise((resolve, reject) => {
-          rl.question(player1?player1+', enter a position (0-8) : ':'Player1, enter a position(0-8): ', (input) => {
+          rl.question(player1+', enter a position (0-8) : ', (input) => {
          resolve(input)})
         
       });
@@ -143,7 +144,7 @@ const game= async()=>{
     else{
       //playerO plays 
       var pos = await new Promise((resolve, reject) => {
-        rl.question(player2?player2+', enter a position (0-8) : ':'Player2, enter a position(0-8): ', (input) => {
+        rl.question(player2+', enter a position (0-8) : ', (input) => {
        resolve(input)})
       
     });
@@ -151,7 +152,7 @@ const game= async()=>{
     while(board[pos]!==' '||parseInt(pos) <0 ||parseInt(pos) >8){
       console.log('Spot is already taken or invalid position entered!')
       var pos = await new Promise((resolve, reject) => {
-        rl.question(player2?player2+', enter a position (0-8) : ':'Player2, enter a position(0-8): ', (input) => {
+        rl.question(player2+', enter a position (0-8) : ', (input) => {
        resolve(input)})
       
     });
@@ -170,10 +171,10 @@ const game= async()=>{
   
   //determines and displays winner.
   if(isWinner(board, 'X')){
-    console.log(player1?player1:'Player1'," wins!")
+    console.log(player1," wins!")
   }
   else if(isWinner(board,'O')){
-    console.log(player2?player2:'Player2', " wins!")
+    console.log(player2, " wins!")
   }
   else
     console.log(`It's a draw!`)
